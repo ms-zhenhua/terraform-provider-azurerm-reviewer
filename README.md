@@ -28,7 +28,7 @@ This tool provides automated code review capabilities for pull requests of new r
 2. Review a pull request (e.g., id=10000):
 
     ```powershell
-    .\scripts\review_pull_request.ps1 "https://github.com/hashicorp/terraform-provider-azurerm/pull/10000" -Model "gpt-4o" -MaxParallel 3
+    .\scripts\review_pull_request.ps1 "https://github.com/hashicorp/terraform-provider-azurerm/pull/10000"
     ```
 
     If everything goes well, you will get a final result at `./pull_requests/hashicorp_terraform-provider-azurerm_10000/report.md`.
