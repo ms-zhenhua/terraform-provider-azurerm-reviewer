@@ -63,6 +63,16 @@ if ($PullRequestLink -match 'github\.com/(?<owner>[^/]+)/(?<repo>[^/]+)/pull/(?<
         & $runTasksScript -TargetDir $targetDir -MaxParallel $MaxParallel
     }
 
+    # Invoke validate_task_results.ps1
+    $validateScript = Join-Path $PSScriptRoot "validate_task_results.ps1"
+    Write-Host "Invoking validate_task_results.ps1..."
+    if ($Model) {
+        & $validateScript -TargetDir $targetDir -Model $Model -MaxParallel $MaxParallel
+    }
+    else {
+        & $validateScript -TargetDir $targetDir -MaxParallel $MaxParallel
+    }
+
     # Invoke generate_report.ps1
     $generateReportScript = Join-Path $PSScriptRoot "generate_report.ps1"
     Write-Host "Invoking generate_report.ps1..."

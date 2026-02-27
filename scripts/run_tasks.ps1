@@ -97,10 +97,10 @@ try {
                 # Run command
                 # Capture output to avoid noise, but we expect Copilot to create the file
                 if ($Model) {
-                    $output = copilot -p $prompt --model $Model --allow-all-tools 2>&1
+                    $output = copilot -p $prompt --model $Model --allow-all-tools --allow-all-paths 2>&1
                 }
                 else {
-                    $output = copilot -p $prompt --allow-all-tools 2>&1
+                    $output = copilot -p $prompt --allow-all-tools --allow-all-paths 2>&1
                 }
                 $output | Out-String | Write-Host
                 

@@ -10,10 +10,10 @@ $ErrorActionPreference = "Stop"
 
 $reportTxtPath = Join-Path -Path $TargetDir -ChildPath "report.txt"
 $reportMdPath = Join-Path -Path $TargetDir -ChildPath "report.md"
-$taskResultsDir = Join-Path -Path $TargetDir -ChildPath "task_results"
+$taskResultsDir = Join-Path -Path $TargetDir -ChildPath "validated_results"
 
 try {
-    # 2. combine json array in each file under `TargetDir/task_results` into a single json array saved in 'TargetDir/report.txt' if 'TargetDir/report.txt' does not exist
+    # 2. combine json array in each file under `TargetDir/validated_results` into a single json array saved in 'TargetDir/report.txt' if 'TargetDir/report.txt' does not exist
     if (-not (Test-Path -Path $reportTxtPath)) {
         Write-Host "Combining task results into $reportTxtPath..."
         $combinedResults = @()
@@ -40,10 +40,10 @@ try {
         
         # Invoke copilot command
         if ($Model) {
-            & copilot -p $prompt --model $Model --allow-all-tools
+            & copilot -p $prompt --model $Model --allow-all-tools --allow-all-paths
         }
         else {
-            & copilot -p $prompt --allow-all-tools
+            & copilot -p $prompt --allow-all-tools --allow-all-paths
         }
         
         if ($LASTEXITCODE -ne 0) {
