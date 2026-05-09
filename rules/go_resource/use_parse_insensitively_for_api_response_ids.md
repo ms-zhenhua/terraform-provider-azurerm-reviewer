@@ -34,7 +34,29 @@ func(ctx context.Context, metadata sdk.ResourceMetaData) error {
 }
 ```
 
-### bad:
+### bad: use the general `Parse` method when parsing IDs from API responses
+```go
+func(ctx context.Context, metadata sdk.ResourceMetaData) error {
+    resp, err := client.Get(ctx, *id)
+    if err != nil {
+        return err
+    }
+    
+    if model := resp.Model; model != nil {
+        if prop := model.Properties; prop != nil {
+            if prop.Subnet != nil {
+                parsedSubnetId, err := commonids.ParseSubnetID(prop.Subnet.Id)
+                if err != nil {
+                    return err
+                }
+            }
+        }
+    }
+    return nil
+}
+```
+
+### bad: not parse IDs from API responses
 ```go
 func(ctx context.Context, metadata sdk.ResourceMetaData) error {
     resp, err := client.Get(ctx, *id)
