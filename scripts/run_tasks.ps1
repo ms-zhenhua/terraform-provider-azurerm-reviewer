@@ -93,6 +93,7 @@ try {
                 # Construct the command
                 $relativePath = "tasks/$($file.Name)"
                 $prompt = "Complete the task in $relativePath."
+                Write-Host "Running command: copilot -p '$prompt' --allow-all-tools --allow-all-paths" -ForegroundColor Blue
                 
                 # Run command
                 # Capture output to avoid noise, but we expect Copilot to create the file
